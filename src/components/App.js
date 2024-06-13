@@ -1,26 +1,29 @@
-import React, { useState } from "react";
-import ShoppingList from "./ShoppingList";
-import itemData from "../data/items";
+// src/components/Counter.js
+import React, { Component } from 'react';
 
-function App() {
-  const [items, setItems] = useState(itemData);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  function handleDarkModeClick() {
-    setIsDarkMode((isDarkMode) => !isDarkMode);
+class Counter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+    this.increment = this.increment.bind(this); // Alternatively, use arrow function for the handler
   }
 
-  return (
-    <div className={"App " + (isDarkMode ? "dark" : "light")}>
-      <header>
-        <h2>Shopster</h2>
-        <button onClick={handleDarkModeClick}>
-          {isDarkMode ? "Dark" : "Light"} Mode
-        </button>
-      </header>
-      <ShoppingList items={items} />
-    </div>
-  );
+  increment() {
+    this.setState(prevState => ({
+      count: prevState.count + 1
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.increment}>Increment</button>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default Counter;
